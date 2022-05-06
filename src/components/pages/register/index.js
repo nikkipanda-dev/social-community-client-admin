@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { axiosInstance } from "../../../requests";
 import { styled } from "../../../stitches.config";
@@ -15,13 +16,22 @@ export const Register = ({
     handleLogIn,
     handleLogOut, 
 }) => {
+    const navigate = useNavigate();
+
     const [isTokenValid, setIsTokenValid] = useState(false);
+    
+    const handleValidToken = () => setIsTokenValid(true);
+    const handleInvalidToken = () => setIsTokenValid(false);
 
     const validateToken = () => {
         axiosInstance.get('http://localhost:8000/api/validate-invitation/' + window.location.pathname.slice(10))
 
         .then (response => {
-            console.log('response ', response.data);
+            if (response.data.isSuccess) {
+                handleValidToken();
+            } else {
+                handleInvalidToken();
+            }
         })
 
         .catch (err => {
@@ -44,11 +54,15 @@ export const Register = ({
     return (
         <Section className="bg-primary">
             <RegisterWrapper className="mx-auto">
-                <RegisterSection 
-                className="mx-auto" 
-                isAuth={isAuth} 
-                handleLogIn={handleLogIn} 
-                handleLogOut={handleLogOut} />
+            {
+                isTokenValid ?
+                <RegisterSection
+                className="mx-auto"
+                isAuth={isAuth}
+                handleLogIn={handleLogIn}
+                handleLogOut={handleLogOut} /> : 
+                navigate('/not-found')
+            }
             </RegisterWrapper>
         </Section>
     )

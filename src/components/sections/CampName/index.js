@@ -1,6 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Form, Input, } from 'antd';
+import Cookies from 'js-cookie';
 import { axiosInstance } from '../../../requests';
+import { isAuth } from '../../../util';
 import { styled } from "../../../stitches.config";
 
 import Heading from '../../core/Heading';
@@ -49,28 +51,31 @@ export const CampName = () => {
     }
 
     const onFinish = value => {
-        console.log('val ', value);
-
         const campNameForm = new FormData();
 
         for (let i in value) {
             campNameForm.append(i, value[i]);
         }
 
-        for (let [i, val] of campNameForm.entries()) {
-            console.log('i ', i);
-            console.log('val ', val);
+        if (isAuth()) {
+            const authToken = JSON.parse(Cookies.get('auth_user_token'));
+
+            axiosInstance.post('http://localhost:8000/api/community/store', campNameForm, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                }
+            })
+
+            .then (response => {
+                console.log('res ', response.data);
+            })
+
+            .catch (err => {
+                console.log('err ', err.response ? err.response.data.errors : err);
+            });
+        } else {
+            console.log('on camp name: no cookies');
         }
-
-        // axiosInstance.post('http://localhost:8000/api/community/store', campNameForm)
-
-        // .then (response => {
-        //     console.log('res ', response.data);
-        // })
-
-        // .catch (err => {
-        //     console.log('err ', err.response ? err.response.data.errors : err);
-        // });
     }
 
     return (
@@ -103,12 +108,20 @@ export const CampName = () => {
                 <Form.Item
                 label="New camp name"
                 name="name"
-                rules={[{ required: true, type: 'string', min: 2, max: 100, }]}>
+                rules={[{ 
+                    required: true, 
+                    type: 'string', 
+                    min: 2, 
+                    max: 100,
+                }]}>
                     <Input />
                 </Form.Item>
 
                 <Form.Item>
-                    <Button type="primary" text="Submit" />
+                    <Button 
+                    type="primary" 
+                    text="Save"
+                    color="brown" />
                 </Form.Item>
             </Form>
         }

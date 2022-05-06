@@ -1,4 +1,6 @@
+import { isAuth } from '../../../util';
 import { axiosInstance } from '../../../requests';
+import Cookies from 'js-cookie';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCircleMinus, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { Form, Input } from 'antd';
@@ -60,15 +62,27 @@ export const InviteMembers = () => {
             console.log('val ', val);
         }
 
-        axiosInstance.post('http://localhost:8000/api/invite', inviteForm)
+        if (isAuth()) {
+            console.log('on invite: auth');
 
-        .then (response => {
-            console.log('res' , response.data);
-        })
+            const authToken = JSON.parse(Cookies.get('auth_user_token'));
 
-        .catch (err => {
-            console.log('err ', err.response ? err.response.data.errors : err);
-        });
+            axiosInstance.post('http://localhost:8000/api/invite', inviteForm, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                }
+            })
+
+            .then(response => {
+                console.log('res', response.data);
+            })
+
+            .catch(err => {
+                console.log('err ', err.response ? err.response.data.errors : err);
+            });
+        } else {
+            console.log('on invite: no cookies');
+        }
     }
 
     return (
