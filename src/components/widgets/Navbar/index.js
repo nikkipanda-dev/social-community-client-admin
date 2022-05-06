@@ -25,11 +25,17 @@ export const Navbar = ({
     const navigate = useNavigate();
 
     const logout = () => {
-        if (Cookies.get('auth_user') && JSON.parse(Cookies.get('auth_user'))) {
+        if ((Cookies.get('auth_user') && JSON.parse(Cookies.get('auth_user'))) && (Cookies.get('auth_user_token') && JSON.parse(Cookies.get('auth_user_token')))) {
             const logoutForm = new FormData();
             logoutForm.append('email', JSON.parse(Cookies.get('auth_user')).email);
 
-            axiosInstance.post('http://localhost:8000/api/logout', logoutForm)
+            const authToken = JSON.parse(Cookies.get('auth_user_token'));
+
+            axiosInstance.post('http://localhost:8000/api/logout', logoutForm, {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                }
+            })
 
             .then (response => {
 

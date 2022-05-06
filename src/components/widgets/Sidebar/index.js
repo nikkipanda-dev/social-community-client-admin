@@ -87,7 +87,7 @@ export const Sidebar = ({ className, css, children }) => {
         },
         10: {
             page: "User Activities",
-            link: "/user-activities",
+            link: "user-activities",
             icon: <FontAwesomeIcon icon={faScroll} className="fa-2xl" />,
         },
     }
