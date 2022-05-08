@@ -90,10 +90,11 @@ export const Form = ({
                 } else {
                     console.log('invalid');
                     // handleLogOut();
-                    window.location.reload();
+                    // window.location.reload();
                 }
             } else {
                 console.log('no')
+                window.location.reload();
             }
         })
 
