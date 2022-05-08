@@ -82,7 +82,7 @@ export const Form = ({
 
                 if (Cookies.get('auth_user') && Cookies.get('auth_user_token')) {
                     console.log('valid')
-                    handleLogIn();
+                    // handleLogIn();
 
                     setTimeout(() => {
                         navigate('/dashboard');
