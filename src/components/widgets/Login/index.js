@@ -82,14 +82,14 @@ export const Form = ({
 
                 if (Cookies.get('auth_user') && Cookies.get('auth_user_token')) {
                     console.log('valid')
+                    handleLogIn();
 
                     setTimeout(() => {
-                        handleLogIn();
                         navigate('/dashboard');
                     }, 1000);
                 } else {
                     console.log('invalid');
-                    handleLogOut();
+                    // handleLogOut();
                     window.location.reload();
                 }
             } else {
