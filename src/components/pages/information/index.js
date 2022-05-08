@@ -22,7 +22,8 @@ const GeneralInformationWrapper = styled('div', {
 });
 
 export const Information = () => {
-
+    console.log('key ', process.env.REACT_APP_API_KEY);
+    console.log('url ', process.env.REACT_APP_BASE_URL);
     const [details, setDetails] = useState('');
 
     const handleDetails = data => setDetails(data);
@@ -31,7 +32,7 @@ export const Information = () => {
         if (isAuth()) {
             const authToken = JSON.parse(Cookies.get('auth_user_token'));
 
-            axiosInstance.get('http://localhost:8000/api/community/details', {
+            axiosInstance.get(process.env.REACT_APP_BASE_URL + 'community/details', {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 }

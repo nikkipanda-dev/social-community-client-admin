@@ -62,7 +62,7 @@ export const Form = ({
             loginForm.append(i, values[i]);
         }
 
-        axiosInstance.post('http://localhost:8000/api/login', loginForm)
+        axiosInstance.post(process.env.REACT_APP_BASE_URL + 'login', loginForm)
 
         .then (response => {
             if (response.data.isSuccess) {

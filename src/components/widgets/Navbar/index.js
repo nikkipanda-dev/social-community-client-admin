@@ -31,7 +31,7 @@ export const Navbar = ({
 
             const authToken = JSON.parse(Cookies.get('auth_user_token'));
 
-            axiosInstance.post('http://localhost:8000/api/logout', logoutForm, {
+            axiosInstance.post(process.env.REACT_APP_BASE_URL + 'logout', logoutForm, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 }
