@@ -67,7 +67,7 @@ export const InviteMembers = () => {
 
             const authToken = JSON.parse(Cookies.get('auth_user_token'));
 
-            axiosInstance.post('http://localhost:8000/api/invite', inviteForm, {
+            axiosInstance.post(process.env.REACT_APP_BASE_URL + "invite", inviteForm, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 }
