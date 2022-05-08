@@ -85,10 +85,10 @@ export const Form = ({
                 if (Cookies.get('auth_user') && Cookies.get('auth_user_token')) {
                     console.log('valid')
 
-                    // setTimeout(() => {
-                    //     handleLogIn();
-                    //     navigate('/dashboard');
-                    // }, 1000);
+                    setTimeout(() => {
+                        handleLogIn();
+                        navigate('/dashboard');
+                    }, 1000);
                 }
             } else {
                 console.log('no')
