@@ -2,8 +2,7 @@ import { useState, useEffect, useRef, } from 'react';
 import { isAuth } from '../../../util';
 import Cookies from 'js-cookie';
 import { axiosInstance } from '../../../requests';
-import { UploadOutlined } from '@ant-design/icons';
-import { Form, Upload, message } from 'antd';
+import { message } from 'antd';
 import { styled } from "../../../stitches.config";
 
 import Heading from '../../core/Heading';
@@ -73,6 +72,38 @@ export const CampImage = ({
         setForceRender(!forceRender);
     }
 
+    const handleSubmit = () => {
+        if (isAuth()) {
+            const authToken = JSON.parse(Cookies.get('auth_user_token'));
+
+            if (images && Object.keys(images).length > 0) {
+                console.log('image count ', Object.keys(images).length);
+                console.log(images[0]);
+                const imageForm = new FormData();
+                imageForm.append('image', images[0]);
+                campNameForm.append('username', JSON.parse(Cookies.get('auth_user')).username);
+
+                axiosInstance.post(process.env.REACT_APP_BASE_URL + "community/store-image", imageForm, {
+                    headers: {
+                        Authorization: `Bearer ${authToken}`,
+                    }
+                })
+
+                .then (response => {
+                    console.log('res ', response.data);
+                })
+
+                .catch (err => {
+                    console.log('err ', err.response ? err.response.data.errors : err);
+                });
+            } else {
+                console.log('no image uploaded');
+            }
+        } else {
+            console.log('on camp image: no image');
+        }
+    }
+
     useEffect(() => {
         let loading = true;
         let array = [];
@@ -110,13 +141,17 @@ export const CampImage = ({
             name="image" 
             id="image"
             hidden
-            onChange={evt => setPreview(evt) } />
+            onChange={evt => setPreview(evt)} />
         {
             (imageUrls && Object.keys(imageUrls).length > 0) ?
             Object.keys(imageUrls).map((i, val) => {
                 return <Image key={Object.values(imageUrls)[val].id} src={Object.values(imageUrls)[val].src} />
             }) : ' No image uploaded'
         }
+        <Button 
+        type="button" 
+        text="Submit"
+        onClick={() => handleSubmit()} />
         </CampImageFormWrapper>
     )
 }
