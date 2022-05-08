@@ -53,6 +53,10 @@ export const Form = ({
     const [emailHasFeedback, setEmailHasFeedback] = useState(false);
     const [passwordHasFeedback, setPasswordHasFeedback] = useState(false);
 
+    const handleRequest = evt => {
+        // evt.preventDefault();
+    }
+
     const onFinish = values => {
         console.log('Received values of form: ', values);
 
@@ -61,8 +65,6 @@ export const Form = ({
         for (let i in values) {
             loginForm.append(i, values[i]);
         }
-
-        // console.log('url: ', process.env.REACT_APP_BASE_URL + 'login');
 
         axiosInstance.post("https://api.casualcampers.club/api/login", loginForm)
 
