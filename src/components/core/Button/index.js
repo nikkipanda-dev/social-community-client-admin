@@ -89,6 +89,7 @@ export const Button = ({
     color,
     outline,
     onClick,
+    evtOnclick,
     type,
 }) => {
     return (
@@ -97,6 +98,7 @@ export const Button = ({
         {...outline && { outline: outline }}
         {...type && { type: type }}
         {...onClick && { onClick: () => onClick() }}
+        {...evtOnclick && { onClick: evt => evtOnclick(evt) }}
         className={'' + ( className ? (' ' +  className) : '')} 
         {...css && { css: { ...css } }}>
             {text}

@@ -33,6 +33,12 @@ export const {
             small: '1rem',
             medium: '1.3rem',
             large: '1.6rem',
+            heading1: '6.25rem',
+            heading2: '5.63rem',
+            heading3: '5rem',
+            heading4: '4.06rem',
+            heading5: '3.44rem',
+            heading6: '2.5rem',
         },
         fonts: {
             patuaOne: 'Patua One, cursive',
