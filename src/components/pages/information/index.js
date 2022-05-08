@@ -17,14 +17,11 @@ const InformationWrapper = styled('div', {
     },
 });
 
-const GeneralInformationWrapper = styled('div', {
-    maxWidth: '1000px',
-});
+const GeneralInformationWrapper = styled('div', {});
 
 export const Information = () => {
-    console.log('key ', process.env.REACT_APP_API_KEY);
-    console.log('url ', process.env.REACT_APP_BASE_URL);
     const [details, setDetails] = useState('');
+    const [forceRender, setForceRender] = useState(false);
 
     const handleDetails = data => setDetails(data);
 
@@ -71,7 +68,10 @@ export const Information = () => {
             <GeneralInformationWrapper>
                 <Heading type={5} text="General" />
                 <CampName details={details} handleDetails={handleDetails} />
-                <CampImage className="mt-3" />
+                <CampImage 
+                className="mt-3" 
+                forceRender={forceRender} 
+                setForceRender={setForceRender}/>
                 <CampDescription 
                 className="mt-3"
                 details={details} 

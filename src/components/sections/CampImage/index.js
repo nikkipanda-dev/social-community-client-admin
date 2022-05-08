@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, } from 'react';
 import { isAuth } from '../../../util';
 import Cookies from 'js-cookie';
 import { axiosInstance } from '../../../requests';
@@ -9,6 +9,8 @@ import { styled } from "../../../stitches.config";
 import Heading from '../../core/Heading';
 import Button from '../../core/Button';
 import Text from '../../core/Text';
+import Image from '../../core/Image';
+import Input from '../../core/Input';
 
 const CampImageFormWrapper = styled('div', {});
 
@@ -47,61 +49,74 @@ const showAlert = () => {
     });
 };
 
-const fileList = [];
-
 export const CampImage = ({ 
     className, 
     details, 
-    handleDetails
+    handleDetails,
+    forceRender,
+    setForceRender,
 }) => {
-    const [form] = Form.useForm();
+    const ref = useRef('');
     const [isShown, setIsShown] = useState(false);
+    const [images, setImages] = useState('');
+    const [imageUrls, setImageUrls] = useState([]);
     const [help, setHelp] = useState('');
 
-    const handleToggleForm = isShown => {
-        setIsShown(isShown);
-    }
-
-    const handleImageChange = image_path => {
-        handleDetails({ ...details, image_path: image_path });
-        form.resetFields();
-        setHelp('');
-        handleToggleForm(!isShown);
-    }
-
-    const onFinish = value => {
-        console.log('val ', value);
-
-        for (let i in value) {
-            console.log('i ', i);
-            console.log('val ', value[i]);
+    const setPreview = evt => {
+        if (!evt.target.files || evt.target.files.length === 0) {
+            setImages('');
+            return;
+        } else {
+            setImages(evt.target.files);
         }
 
-        const campImageForm = new FormData();
-
-        // if (isAuth()) {
-
-        // } else {
-
-        // }
+        setForceRender(!forceRender);
     }
 
-    const beforeUpload = file => {
-        console.log(file.type);
-        const isPNG = file.type === 'image/png';
-        if (!isPNG) {
-            message.error(`${file.name} is not a png file`);
+    useEffect(() => {
+        let loading = true;
+        let array = [];
+
+        if (loading) {
+            if (images.length > 0) {
+                let ctr = 0;
+
+                for (let i of images) {
+                    array.push({id: ++ctr,src: URL.createObjectURL(i)});
+                    setImageUrls(array);
+                }
+            }
         }
-        return isPNG;
-    }
 
-    const test = info => {
-        console.log('inf', info.fileList);
-    }
+        return () => {
+            if (imageUrls && Object.keys(imageUrls).length > 0) {
+                // revoke each object url
+                Object.keys(imageUrls).map((i, val) => {
+                    URL.revokeObjectURL(Object.values(imageUrls)[val].src);
+                });
+            }
+
+            loading = false;
+        }
+    }, [forceRender]);
 
     return (
         <CampImageFormWrapper className={ '' + (className ? (' ' + className) : '') }>
-            Image
+            <label htmlFor="image">Upload</label>
+            <Input 
+            type="file" 
+            ref={ref}
+            accept='.jpg,.png,.jpeg' 
+            name="image" 
+            id="image"
+            hidden
+            onChange={evt => setPreview(evt) } />
+        {
+            (imageUrls && Object.keys(imageUrls).length > 0) ?
+            Object.keys(imageUrls).map((i, val) => {
+                return <Image key={Object.values(imageUrls)[val].id} src={Object.values(imageUrls)[val].src} />
+            }) : ' No image uploaded'
+        }
         </CampImageFormWrapper>
     )
 }

@@ -24,7 +24,7 @@ export const Register = ({
     const handleInvalidToken = () => setIsTokenValid(false);
 
     const validateToken = () => {
-        axiosInstance.get('http://localhost:8000/api/validate-invitation/' + window.location.pathname.slice(10))
+        axiosInstance.get(process.env.REACT_APP_BASE_URL + "validate-invitation/" + window.location.pathname.slice(10))
 
         .then (response => {
             if (response.data.isSuccess) {

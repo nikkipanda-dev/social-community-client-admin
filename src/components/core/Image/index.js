@@ -16,3 +16,5 @@ export const Image = ({
         {...alt && { alt: alt }}/>
     )
 }
+
+export default Image;

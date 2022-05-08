@@ -32,7 +32,8 @@ const formItemLayout = {
     labelCol: {
         sm: { span:24 },
         md: { span: 7, },
-        lg: { span: 6, },
+        lg: { span: 5, },
+        xl: { span: 4, },
     },
     wrapperCol: {
         md: { span: 24, offset: 1, },
@@ -86,7 +87,7 @@ export const CampName = ({ details, handleDetails }) => {
 
             campNameForm.append('username', JSON.parse(Cookies.get('auth_user')).username);
 
-            axiosInstance.post('http://localhost:8000/api/community/' + ((details && details.name) ? 'update-name' : 'store-name'), campNameForm, {
+            axiosInstance.post(process.env.REACT_APP_BASE_URL + "community/" + ((details && details.name) ? 'update-name' : 'store-name'), campNameForm, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 }
@@ -134,7 +135,7 @@ export const CampName = ({ details, handleDetails }) => {
     }
 
     return (
-        <CampNameFormWrapper className='bg-warning '>
+        <CampNameFormWrapper className='bg-warning'>
             <HeaderWrapper className="d-flex flex-wrap justify-content-between align-items-center">
                 <Heading type={6} text="Name" />
                 <Button
@@ -157,8 +158,8 @@ export const CampName = ({ details, handleDetails }) => {
             {...formItemLayout}
             onFinish={onFinish}
             form={form}
-            className="mt-4"
-            style={{ maxWidth: '1000px', }}
+            className="mt-4 mx-auto"
+            // style={{ maxWidth: '1000px', }}
             validateMessages={validateMessages}
             autoComplete="off">
                 <Form.Item

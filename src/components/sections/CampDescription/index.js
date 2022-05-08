@@ -40,6 +40,7 @@ const formItemLayout = {
         sm: { span: 24 },
         md: { span: 7, },
         lg: { span: 6, },
+        xl: { span: 5, },
     },
     wrapperCol: {
         md: { span: 24, offset: 1, },
@@ -100,7 +101,7 @@ export const CampDescription = ({
 
             campDescForm.append('username', JSON.parse(Cookies.get('auth_user')).username);
 
-            axiosInstance.post('http://localhost:8000/api/community/' + ((details && details.description) ? 'update-description' : 'store-description'), campDescForm, {
+            axiosInstance.post(process.env.REACT_APP_BASE_URL + "community/" + ((details && details.description) ? 'update-description' : 'store-description'), campDescForm, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 }

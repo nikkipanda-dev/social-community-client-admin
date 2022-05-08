@@ -61,7 +61,7 @@ export const Register = ({
             console.log('val ', val);
         }
 
-        axiosInstance.post('http://localhost:8000/api/register/' + window.location.pathname.slice(10), registerForm)
+        axiosInstance.post(process.env.REACT_APP_BASE_URL + "register/" + window.location.pathname.slice(10), registerForm)
 
         .then (response => {
             console.log('res ', response.data);
