@@ -39,8 +39,8 @@ const formItemLayout = {
     labelCol: {
         sm: { span: 24 },
         md: { span: 7, },
-        lg: { span: 6, },
-        xl: { span: 5, },
+        lg: { span: 5, },
+        xl: { span: 4, },
     },
     wrapperCol: {
         md: { span: 24, offset: 1, },
@@ -72,8 +72,6 @@ export const CampDescription = ({
     handleDetails,
     className,
 }) => {
-    console.log('details desc ', details.description);
-
     const [form] = Form.useForm();
     const [isShown, setIsShown] = useState(false);
     const [help, setHelp] = useState('');
@@ -153,11 +151,11 @@ export const CampDescription = ({
             <HeaderWrapper className="d-flex flex-wrap justify-content-between align-items-center">
                 <Heading type={6} text="Description" />
                 <Button
-                    text={isShown ? 'Cancel' : 'Update'}
-                    {...isShown && { color: "orange" }}
-                    className="button-sm"
-                    color={!(isShown) && 'orange'}
-                    onClick={() => handleToggleForm(!isShown)} />       
+                text={isShown ? 'Cancel' : 'Update'}
+                {...isShown && { color: "orange" }}
+                className="button-sm"
+                color={!(isShown) && 'orange'}
+                onClick={() => handleToggleForm(!isShown)} />       
             </HeaderWrapper>
             <DescriptionWrapper>
                 <Text type="span">
@@ -173,7 +171,7 @@ export const CampDescription = ({
             name="camp-description-form"
             {...formItemLayout}
             className="mt-4"
-            style={{ maxWidth: '1000px', }}
+            // style={{ maxWidth: '1000px', }}
             validateMessages={validateMessages}
             onFinish={onFinish}
             autoComplete="off">

@@ -21,6 +21,9 @@ export const {
             mellowApricot: '#FFBF69',
             orangeRedCrayola: '#F95F5F',
             pineGreen: '#007B70',
+            lightGreen: '#dfffd8',
+            lightYellow: '#fff6de',
+            salmon: '#fff4ef',
         },
         space: {
             "space-1": '5px',

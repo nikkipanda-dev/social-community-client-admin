@@ -7,6 +7,9 @@ const textStyle = {
     fontSize: '$small',
     variants: {
         color: {
+            darkGray: {
+                color: '$darkGray',
+            },
             brown: {
                 color: '$sealBrown',
             },
@@ -16,6 +19,14 @@ const textStyle = {
             red: {
                 color: '$orangeRedCrayola',
             }
+        },
+        size: {
+            medium: {
+                fontSize: '$medium',
+            },
+            large: {
+                fontSize: '$large',
+            },
         },
     }
 };
@@ -41,7 +52,11 @@ export const Text = ({
     type, 
     className, 
     css, 
+    as,
     color,
+    size,
+    onClick,
+    evtOnclick,
     children,
 }) => {
     const TextWrapper = textType[type];
@@ -50,8 +65,12 @@ export const Text = ({
         TextWrapper ? 
         <TextWrapper 
         {...color && { color: color }}
+        {...as && { as: as }}
+        {...size && { size: size }}
+        {...onClick && { onClick: () => onClick() }}
+        {...evtOnclick && { onClick: evt => evtOnclick(evt) }}
         className={ className } 
-        css={{ ...css }}>
+        {...css && { css: { ...css } }}>
             { children }
         </TextWrapper> : <NotFound />
     )

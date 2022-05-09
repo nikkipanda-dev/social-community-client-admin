@@ -19,11 +19,22 @@ const InformationWrapper = styled('div', {
 
 const GeneralInformationWrapper = styled('div', {});
 
+const TeamWrapper = styled('div', {});
+
+const SocialNetworkAccountsWrapper = styled('div', {});
+
 export const Information = () => {
+    const [isVisible, setIsVisible] = useState(false);
+
     const [details, setDetails] = useState('');
+    const [team, setTeam] = useState('');
     const [forceRender, setForceRender] = useState(false);
 
     const handleDetails = data => setDetails(data);
+    const handleTeam = data => setTeam(data);
+
+    const handleShowModal = () => setIsVisible(true);
+    const handleHideModal = () => setIsVisible(false);
 
     const getDetails = () => {
         if (isAuth()) {
@@ -51,11 +62,38 @@ export const Information = () => {
         }
     }
 
+    const getTeamMembers = () => {
+        if (isAuth()) {
+            const authToken = JSON.parse(Cookies.get('auth_user_token'));
+
+            axiosInstance.get(process.env.REACT_APP_BASE_URL + 'community/team', {
+                headers: {
+                    Authorization: `Bearer ${authToken}`,
+                }
+            })
+
+                .then(response => {
+                    if (response.data.isSuccess) {
+                        handleTeam(response.data.data.details);
+                    } else {
+                        console.log('response ', response.data.errorText);
+                    }
+                })
+
+                .catch(err => {
+                    console.log('err ', err.response ? err.response.data.errors : '');
+                });
+        } else {
+            console.log('on information team: no cookies');
+        }
+    }
+
     useEffect(() => {
         let loading = true;
 
         if (loading) {
             getDetails();
+            getTeamMembers();
         }
 
         return () => {
@@ -77,8 +115,18 @@ export const Information = () => {
                 details={details} 
                 handleDetails={handleDetails} />
             </GeneralInformationWrapper>
-            <Team />
-            <SocialNetworkAccounts />
+            <TeamWrapper>
+                <Heading type={5} text="Team" />
+                <Team 
+                team={team} 
+                handleTeam={handleTeam}
+                isVisible={isVisible}
+                setIsVisible={handleShowModal}
+                onCancel={handleHideModal} />
+            </TeamWrapper>
+            <SocialNetworkAccountsWrapper>
+                <SocialNetworkAccounts />
+            </SocialNetworkAccountsWrapper>
         </InformationWrapper>
     )
 }

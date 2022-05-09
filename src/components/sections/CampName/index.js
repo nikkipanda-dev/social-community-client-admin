@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { Form, Input, message } from 'antd';
 import Cookies from 'js-cookie';
 import { axiosInstance } from '../../../requests';
@@ -12,7 +12,7 @@ import Text from '../../core/Text';
 const CampNameFormWrapper = styled('div', {
     'label.ant-form-item-required': {
         fontFamily: '$manjari',
-        marginTop: '35px',
+        marginTop: '$space-4',
         fontWeight: 'bold',
         fontSize: '$default',
     },
@@ -159,7 +159,6 @@ export const CampName = ({ details, handleDetails }) => {
             onFinish={onFinish}
             form={form}
             className="mt-4 mx-auto"
-            // style={{ maxWidth: '1000px', }}
             validateMessages={validateMessages}
             autoComplete="off">
                 <Form.Item
@@ -177,7 +176,7 @@ export const CampName = ({ details, handleDetails }) => {
 
                 <SubmitButtonWrapper className="d-grid gap-2 col-12 col-md-2 col-lg-1 mx-auto">
                     <Button 
-                    type="primary" 
+                    type="submit" 
                     text="Save"
                     color="brown" />
                 </SubmitButtonWrapper>

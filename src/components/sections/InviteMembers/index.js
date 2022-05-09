@@ -138,7 +138,7 @@ export const InviteMembers = () => {
                                     <Button onClick={() => add()} text={<><FontAwesomeIcon icon={faPlus} /> Add</>} />
                                 </Form.Item>
                                 <Form.Item>
-                                    <SubmitButtonWrapper className='d-grid col-12 col-sm-6 col-md-5 mx-auto'>
+                                    <SubmitButtonWrapper className="d-grid col-12 col-sm-6 col-md-5 mx-auto">
                                         <Button
                                         type="submit"
                                         text={"Send " + (fields.length > 1 ? 'invitations' : 'invitation')}
