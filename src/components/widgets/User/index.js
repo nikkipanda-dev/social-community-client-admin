@@ -3,8 +3,6 @@ import { styled } from "../../../stitches.config";
 import UserItem from "./Item";
 import UserCard from "./Card";
 
-const ImageWrapper = styled('div', {});
-
 const userType = {
     card: UserCard,
     item: UserItem,

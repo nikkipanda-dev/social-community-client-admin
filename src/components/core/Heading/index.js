@@ -2,6 +2,7 @@ import { styled } from "../../../stitches.config";
 
 const headingStyle = {
     fontFamily: '$patuaOne',
+    letterSpacing: '1px',
 };
 
 const Heading1Wrapper = styled('h1',

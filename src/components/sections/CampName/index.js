@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Form, Input, message } from 'antd';
 import Cookies from 'js-cookie';
 import { axiosInstance } from '../../../requests';
-import { isAuth } from '../../../util';
+import { isAuth, key, showAlert } from '../../../util';
 import { styled } from "../../../stitches.config";
 
 import Heading from '../../core/Heading';
@@ -16,7 +16,7 @@ const CampNameFormWrapper = styled('div', {
         fontWeight: 'bold',
         fontSize: '$default',
     },
-    '.ant-form-item-control-input-content > input, .ant-form-item-control-input-content > textarea, .ant-form-item-control-input-content > span.ant-input-affix-wrapper, .ant-form-item-control-input-content > span.ant-input-affix-wrapper-focused': {
+    '.ant-form-item-control-input-content > input, .ant-form-item-control-input-content > span.ant-input-affix-wrapper, .ant-form-item-control-input-content > span.ant-input-affix-wrapper-focused': {
         border: '5px solid $black !important',
         borderRadius: '$default',
         boxShadow: 'unset !important',
@@ -47,18 +47,6 @@ const validateMessages = {
     }
 };
 
-const key = 'updatable';
-
-const showAlert = () => {
-    message.loading({
-        content: 'Loading...', 
-        key, 
-        style: {
-            marginTop: '10vh',
-            zIndex: '999999',
-    },});
-};
-
 export const CampName = ({ details, handleDetails }) => {
     const [form] = Form.useForm();
     const [isShown, setIsShown] = useState(false);
@@ -87,7 +75,7 @@ export const CampName = ({ details, handleDetails }) => {
 
             campNameForm.append('username', JSON.parse(Cookies.get('auth_user')).username);
 
-            axiosInstance.post(process.env.REACT_APP_BASE_URL + "community/" + ((details && details.name) ? 'update-name' : 'store-name'), campNameForm, {
+            axiosInstance.post(process.env.REACT_APP_BASE_URL + "community/update-name", campNameForm, {
                 headers: {
                     Authorization: `Bearer ${authToken}`,
                 }
@@ -108,7 +96,6 @@ export const CampName = ({ details, handleDetails }) => {
                             }});
                     }, 1000);
                 } else {
-                    console.log('err response ', response.data.data.errorText);
                     showAlert();
                     setTimeout(() => {
                         message.info({
@@ -135,7 +122,7 @@ export const CampName = ({ details, handleDetails }) => {
     }
 
     return (
-        <CampNameFormWrapper className='bg-warning'>
+        <CampNameFormWrapper>
             <HeaderWrapper className="d-flex flex-wrap justify-content-between align-items-center">
                 <Heading type={6} text="Name" />
                 <Button
@@ -147,7 +134,6 @@ export const CampName = ({ details, handleDetails }) => {
             </HeaderWrapper>
             <Text 
             type="span" 
-            className="" 
             css={{ display: 'inline-block', }}>
                 Current: {(details && details.name) && details.name}
             </Text>

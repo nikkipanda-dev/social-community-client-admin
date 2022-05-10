@@ -52,7 +52,9 @@ export const {
             default: '150%',
             medium: '200%',
         },
-        letterSpacings: {},
+        letterSpacings: {
+            default: '.5px',
+        },
         sizes: {},
         borderWidths: {
             default: '5px',
@@ -84,6 +86,10 @@ export const globalStyles = globalCss({
         margin: 0, 
         padding: 0,
         fontSize: '$default',
+    },
+    'div.ant-form-item-control > div.ant-form-item-explain': {
+        fontFamily: '$manjari',
+        fontSize: '$small',
     },
     '@import': ["https://fonts.googleapis.com/css2?family=Manjari&family=Patua+One&display=swap"],
 });

@@ -1,22 +1,6 @@
-import { useState } from 'react';
-import { Form, Input, } from 'antd';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-    faCircleMinus,
-    faPlus,
-    faCircleXmark,
-    faGlobe,
-} from '@fortawesome/free-solid-svg-icons';
-import { 
-    faFacebook,
-    faInstagram,
-    faTwitter,
-} from '@fortawesome/free-brands-svg-icons';
 import { styled } from '../../../stitches.config';
 
 import Heading from '../../core/Heading';
-import Button from '../../core/Button';
-import Text from '../../core/Text';
 import CommunityWebsite from '../../widgets/CommunityWebsite';
 import CommunityFacebook from '../../widgets/CommunityFacebook';
 import CommunityInstagram from '../../widgets/CommunityInstagram';
@@ -38,23 +22,7 @@ const InstagramWrapper = styled('div', {});
 
 const TwitterWrapper = styled('div', {});
 
-export const SocialNetworkAccounts = () => {
-    const [form] = Form.useForm();
-    const [isShown, setIsShown] = useState(false);
-    const [help, setHelp] = useState('');
-
-    const handleToggleForm = isShown => {
-        setIsShown(isShown);
-    }
-
-    const onFinish = values => {
-        console.log('social values: ', values);
-
-        for (let i in values) {
-            console.log('i ', i);
-            console.log('val ', values[i]);
-        }
-    }
+export const SocialNetworkAccounts = ({ details, handleDetails }) => {
 
     return (
         <SocialNetworkAccountsWrapper>
@@ -62,40 +30,16 @@ export const SocialNetworkAccounts = () => {
                 <Heading type={6} text="Social Network Accounts" />
             </HeaderWrapper>
             <WebsiteWrapper className="d-flex flex-column">
-                <Text type="span" size="medium">Website</Text>
-                <Text
-                type="span"
-                css={{ display: 'inline-block', }}>
-                    Current: Website
-                </Text>
-                <CommunityWebsite />
+                <CommunityWebsite details={details} handleDetails={handleDetails} />
             </WebsiteWrapper>
             <FacebookWrapper>
-                <Text
-                type="span"
-                className=""
-                css={{ display: 'inline-block', }}>
-                    Current: Facebook
-                </Text>
-                <CommunityFacebook />
+                <CommunityFacebook details={details} handleDetails={handleDetails} />
             </FacebookWrapper>
             <InstagramWrapper>
-                <Text
-                type="span"
-                className=""
-                css={{ display: 'inline-block', }}>
-                    Current: Instagram
-                </Text>
-                <CommunityInstagram />
+                <CommunityInstagram details={details} handleDetails={handleDetails} />
             </InstagramWrapper>
             <TwitterWrapper>
-                <Text
-                type="span"
-                className=""
-                css={{ display: 'inline-block', }}>
-                    Current: Twitter
-                </Text>
-                <CommunityTwitter />
+                <CommunityTwitter details={details} handleDetails={handleDetails} />
             </TwitterWrapper>
         </SocialNetworkAccountsWrapper>
     )
