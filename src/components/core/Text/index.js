@@ -5,6 +5,8 @@ import NotFound from '../../widgets/NotFound';
 const textStyle = {
     fontFamily: '$manjari',
     fontSize: '$small',
+    letterSpacing: '$default',
+    wordSpacing: '.5px',
     variants: {
         color: {
             darkGray: {

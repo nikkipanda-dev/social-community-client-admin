@@ -1,4 +1,11 @@
 import { Modal as ModalWrapper, } from 'antd';
+import { styled } from '../../../stitches.config';
+
+import Text from '../../core/Text';
+
+const ModalHeaderWrapper = styled('div', {});
+
+const ModalBodyWrapper = styled('div', {});
 
 export const Modal = ({ 
     children,
@@ -15,13 +22,17 @@ export const Modal = ({
         closable={closable}
         footer={null}
         maskClosable={maskClosable}
-        {...title && { title: title }}
         visible={isVisible}
         onCancel={onCancel}
         {...bodyStyle && { bodyStyle: { ...bodyStyle } }}
         {...wrapClassName && { wrapClassName: { ...wrapClassName } }}
         zIndex={99999999}>
-            {children}
+            <ModalHeaderWrapper>
+                <Text type="span" size="medium">{title}</Text>
+            </ModalHeaderWrapper>
+            <ModalBodyWrapper className={'' + ((title) && ' mt-4')}>
+                {children}
+            </ModalBodyWrapper>
         </ModalWrapper>
     )
 }

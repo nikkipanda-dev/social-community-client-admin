@@ -44,6 +44,7 @@ const AlertBodyWrapper = styled('div', {});
 
 export const Alert = ({
     status,
+    icon,
     className,
     css,
     children,
@@ -51,6 +52,8 @@ export const Alert = ({
     headerClassName,
     bodyClassName,
 }) => {
+    console.log('status ', status);
+
     return (
         <AlertWrapper 
         status={status}
@@ -58,7 +61,7 @@ export const Alert = ({
         {...css && { css: { ...css } }}>
             <AlertHeaderWrapper className={'d-flex flex-wrap justify-content-start align-items-center' + (headerClassName ? (' ' + headerClassName) : '')}>
             {
-                status &&
+                (status && icon) &&
                 (
                     (status === "info") ? <FontAwesomeIcon
                     className="fa-2xl"

@@ -32,8 +32,8 @@ export const SideBarItem = ({ item }) => {
                     <SidebarItemIconWrapper className="d-flex justify-content-center align-items-center">
                         {item.icon}
                     </SidebarItemIconWrapper>
-                    <Text type="span" css={{ color: '$black', fontWeight: 'bold', }}>
-                         {item.page}
+                    <Text type="span" css={{ color: '$black', }}>
+                        {item.page}
                     </Text>
                 </SidebarItemContentWrapper>
             </NavLink>

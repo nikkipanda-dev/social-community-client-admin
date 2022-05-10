@@ -1,6 +1,6 @@
 import { useState, } from 'react';
 import { Form, Input, Mentions, message } from 'antd';
-import { isAuth } from '../../../util';
+import { isAuth, key, showAlert } from '../../../util';
 import Cookies from 'js-cookie';
 import { axiosInstance } from '../../../requests';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -83,19 +83,6 @@ const validateMessages = {
         range: "${label} must be at least ${min} and maximum of ${max} characters.",
     },
 }
-
-const key = 'updatable';
-
-const showAlert = () => {
-    message.loading({
-        content: 'Loading...',
-        key,
-        style: {
-            marginTop: '10vh',
-            zIndex: '999999',
-        },
-    });
-};
 
 export const Team = ({ 
     team, 

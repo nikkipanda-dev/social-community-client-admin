@@ -16,7 +16,7 @@ export const Dashboard = () => {
         <Section className="mb-5">
             <DashboardWrapper className="mx-auto">
                 <Row className="m-0">
-                    <Column className="col-sm-5 col-md-4 col-lg-3 ">
+                    <Column className="col-sm-5 col-md-4 col-lg-3">
                         <Sidebar />
                     </Column>
                     <Column className="col-sm-7 col-md-8 col-lg-9 bg-light">

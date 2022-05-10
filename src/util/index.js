@@ -1,3 +1,4 @@
+import { message } from 'antd';
 import Cookies from 'js-cookie';
 
 export const isAuth = () => {
@@ -9,3 +10,16 @@ export const isAuth = () => {
 
     return isAuth;
 }
+
+export const key = 'updatable';
+
+export const showAlert = () => {
+    message.loading({
+        content: 'Loading...',
+        key,
+        style: {
+            marginTop: '10vh',
+            zIndex: '999999',
+        },
+    });
+};

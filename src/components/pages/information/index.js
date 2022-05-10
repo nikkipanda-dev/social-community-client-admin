@@ -12,8 +12,9 @@ import SocialNetworkAccounts from "../../sections/SocialNetworkAccounts";
 import Heading from "../../core/Heading";
 
 const InformationWrapper = styled('div', {
+    padding: '$space-3',
     '> div:nth-child(n+2)': {
-        marginTop: '50px',
+        marginTop: '60px',
     },
 });
 
@@ -102,16 +103,16 @@ export const Information = () => {
     }, []);
 
     return (
-        <InformationWrapper>
+        <InformationWrapper className="mt-5 mt-sm-0">
             <GeneralInformationWrapper>
                 <Heading type={5} text="General" />
                 <CampName details={details} handleDetails={handleDetails} />
                 <CampImage 
-                className="mt-3" 
+                className="mt-4" 
                 forceRender={forceRender} 
                 setForceRender={setForceRender}/>
                 <CampDescription 
-                className="mt-3"
+                className="mt-4"
                 details={details} 
                 handleDetails={handleDetails} />
             </GeneralInformationWrapper>
@@ -125,7 +126,7 @@ export const Information = () => {
                 onCancel={handleHideModal} />
             </TeamWrapper>
             <SocialNetworkAccountsWrapper>
-                <SocialNetworkAccounts />
+                <SocialNetworkAccounts details={details} handleDetails={handleDetails}/>
             </SocialNetworkAccountsWrapper>
         </InformationWrapper>
     )
