@@ -126,6 +126,7 @@ export const Information = () => {
                 onCancel={handleHideModal} />
             </TeamWrapper>
             <SocialNetworkAccountsWrapper>
+                <Heading type={5} text="Social Network Accounts" />
                 <SocialNetworkAccounts details={details} handleDetails={handleDetails}/>
             </SocialNetworkAccountsWrapper>
         </InformationWrapper>

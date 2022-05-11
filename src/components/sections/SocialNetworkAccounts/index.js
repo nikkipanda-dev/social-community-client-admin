@@ -26,9 +26,6 @@ export const SocialNetworkAccounts = ({ details, handleDetails }) => {
 
     return (
         <SocialNetworkAccountsWrapper>
-            <HeaderWrapper className="d-flex flex-wrap justify-content-between align-items-center">
-                <Heading type={6} text="Social Network Accounts" />
-            </HeaderWrapper>
             <WebsiteWrapper className="d-flex flex-column">
                 <CommunityWebsite details={details} handleDetails={handleDetails} />
             </WebsiteWrapper>

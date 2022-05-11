@@ -42,7 +42,6 @@ const formItemLayout = {
 export const Register = ({ 
     className, 
     css,
-    isAuth,
     handleLogIn,
     handleLogOut,
 }) => {
