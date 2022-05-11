@@ -19,7 +19,7 @@ export const Dashboard = () => {
                     <Column className="col-sm-5 col-md-4 col-lg-3">
                         <Sidebar />
                     </Column>
-                    <Column className="col-sm-7 col-md-8 col-lg-9 bg-light">
+                    <Column className="col-sm-7 col-md-8 col-lg-9">
                         <Outlet />
                     </Column>
                 </Row>

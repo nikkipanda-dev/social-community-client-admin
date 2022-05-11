@@ -139,7 +139,6 @@ export const Team = ({
             const authToken = JSON.parse(Cookies.get('auth_user_token'));
 
             removeMemberForm.append('auth_username', JSON.parse(Cookies.get('auth_user')).username);
-            removeMemberForm.append('username', usernameRemove);
             removeMemberForm.append('id', IdRemove);
 
             axiosInstance.post(process.env.REACT_APP_BASE_URL + "community/remove-team-member", removeMemberForm, {
@@ -169,9 +168,8 @@ export const Team = ({
             })
 
             .catch(err => {
-                if (err.response && err.response.data.errors) {
-                    setHelp(<Text type="span" color="red">{err.response.data.errors.name[0]}</Text>);
-                }
+                console.log('err ', err.response.data.errors)
+                         
             });
         } else {
             console.log('on remove team member: no cookies');
@@ -398,7 +396,7 @@ export const Team = ({
             wrapClassName="bg-warning"
             title="Confirmation"
             onCancel={onCancel}>
-                <Alert status="warning" header="Remove user?" />
+                <Alert status="warning" icon header="Remove user?" />
                 <SubmitButtonWrapper className="d-flex justify-content-end mt-3">
                     <Button
                     type="button"

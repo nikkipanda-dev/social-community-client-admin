@@ -86,7 +86,9 @@ export const Anchor = ({
     size,
     target,
     className,
-    css
+    onClick,
+    preventDefault,
+    css,
 }) => {
     return (
         <AnchorWrapper 
@@ -94,6 +96,8 @@ export const Anchor = ({
         href={href} 
         {...color & { color: color }}
         {...size & { size: size }}
+        {...onClick && { onClick: () => onClick() }}
+        {...preventDefault && { onClick: evt => evt.preventDefault() }}
         {...target & { target: target }}
         {...css & { css: { ...css } }}>
             {text}

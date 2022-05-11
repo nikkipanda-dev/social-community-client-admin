@@ -14,8 +14,6 @@ import Alert from '../../core/Alert';
 
 const MembersWrapper = styled('div', {});
 
-const HeaderWrapper = styled('div', {});
-
 const ColumnWrapper = styled('div', {});
 
 const SubmitButtonWrapper = styled('div', {});
@@ -171,18 +169,15 @@ export const Members = ({
 
     return (
         <MembersWrapper className={'' + (className ? (' ' + className) : '')} {...css & { css: {...css} }}>
-            <HeaderWrapper>
-                <Heading type={5} text="Members" />
-            </HeaderWrapper>
-            {
-                help &&
-                <Alert
-                status={status}
-                header={header}
-                icon>
-                    {help}
-                </Alert>
-            }
+        {
+            help &&
+            <Alert
+            status={status}
+            header={header}
+            icon>
+                {help}
+            </Alert>
+        }
             <TableWrapper>
                 <Table
                 columns={columns}
