@@ -7,7 +7,12 @@ import { styled } from "../../../stitches.config";
 import InviteMembers from "../../sections/InviteMembers";
 import { Members as MembersSection } from "../../sections/Members";
 
-const MembersWrapper = styled('div', {});
+const MembersWrapper = styled('div', {
+    padding: '$space-3',
+    '> div:nth-child(n+2)': {
+        marginTop: '60px',
+    },
+});
 
 export const Members = () => {
     const [members, setMembers] = useState('');

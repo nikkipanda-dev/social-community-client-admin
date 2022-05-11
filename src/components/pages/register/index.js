@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { isAuth } from "../../../util";
 import { axiosInstance } from "../../../requests";
 import { styled } from "../../../stitches.config";
 
@@ -12,16 +13,18 @@ const RegisterWrapper = styled('div', {
 });
 
 export const Register = ({ 
-    isAuth,
     handleLogIn,
     handleLogOut, 
 }) => {
     const navigate = useNavigate();
 
     const [isTokenValid, setIsTokenValid] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
     
     const handleValidToken = () => setIsTokenValid(true);
     const handleInvalidToken = () => setIsTokenValid(false);
+    const handleAuthUser = () => setIsAuthenticated(true);
+    const handleGuest = () => setIsAuthenticated(false);
 
     const validateToken = () => {
         axiosInstance.get(process.env.REACT_APP_BASE_URL + "validate-invitation/" + window.location.pathname.slice(10))
@@ -44,6 +47,8 @@ export const Register = ({
 
         if (loading) {
             validateToken();
+
+            isAuth() ? handleAuthUser() : handleGuest();
         }
 
         return () => {
@@ -55,12 +60,12 @@ export const Register = ({
         <Section className="bg-primary">
             <RegisterWrapper className="mx-auto">
             {
-                isTokenValid ?
+                (isTokenValid && !(isAuthenticated)) ?
                 <RegisterSection
                 className="mx-auto"
-                isAuth={isAuth}
                 handleLogIn={handleLogIn}
                 handleLogOut={handleLogOut} /> : 
+                (isAuthenticated) ? navigate('/dashboard') :
                 navigate('/not-found')
             }
             </RegisterWrapper>
