@@ -165,7 +165,7 @@ export const Discussions = () => {
     return (
         <DiscussionsWrapper>
             <HeaderWrapper>
-                <Heading type={5} text="Discussion Posts" />
+                <Heading type={5} text="Discussions" />
             </HeaderWrapper>
             {
                 help &&

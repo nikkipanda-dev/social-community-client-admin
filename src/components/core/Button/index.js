@@ -39,7 +39,10 @@ const ButtonWrapper = styled('button', {
                 '&:hover': {
                     background: '#de3c3c',
                 },
-            }
+            },
+            transparent: {
+                background: 'none',
+            },
         },
         outline: {
             brown: {
@@ -90,6 +93,8 @@ export const Button = ({
     outline,
     onClick,
     evtOnclick,
+    onMouseEnter,
+    onMouseLeave,
     type,
 }) => {
     return (
@@ -98,6 +103,8 @@ export const Button = ({
         {...outline && { outline: outline }}
         {...type && { type: type }}
         {...onClick && { onClick: () => onClick() }}
+        {...onMouseLeave && { onMouseLeave: () => onMouseLeave() }}
+        {...onMouseEnter && { onMouseEnter: () => onMouseEnter() }}
         {...evtOnclick && { onClick: evt => evtOnclick(evt) }}
         className={'' + ( className ? (' ' +  className) : '')} 
         {...css && { css: { ...css } }}>

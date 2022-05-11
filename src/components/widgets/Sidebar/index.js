@@ -14,8 +14,6 @@ import {
 import { styled } from "../../../stitches.config";
 import SidebarItem from '../SidebarItem';
 
-import Button from '../../core/Button';
-
 const SidebarWrapper = styled('div', {
     borderRadius: '$default',
     background: '$lightGray',

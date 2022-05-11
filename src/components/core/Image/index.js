@@ -22,7 +22,11 @@ export const Image = ({
     size,
     css,
     src,
-    alt
+    alt,
+    onClick,
+    evtOnclick,
+    onMouseOver,
+    onMouseOut,
 }) => {
     return (
         <ImageWrapper
@@ -30,6 +34,10 @@ export const Image = ({
         css={{ ...css }}
         {...size && { size: size }}
         src={src}
+        {...onClick && { onClick: () => onClick() }}
+        {...onMouseOut && { onMouseOut: () => onMouseOut() }}
+        {...onMouseOver && { onMouseOver: () => onMouseOver() }}
+        {...evtOnclick && { onClick: evt => evtOnclick(evt) }}
         {...alt && { alt: alt }} />
     )
 }

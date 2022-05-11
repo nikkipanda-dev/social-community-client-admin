@@ -6,6 +6,7 @@ import { styled } from "../../../stitches.config";
 
 import InviteMembers from "../../sections/InviteMembers";
 import { Members as MembersSection } from "../../sections/Members";
+import Heading from "../../core/Heading";
 
 const MembersWrapper = styled('div', {
     padding: '$space-3',
@@ -13,6 +14,8 @@ const MembersWrapper = styled('div', {
         marginTop: '60px',
     },
 });
+
+const HeaderWrapper = styled('div', {});
 
 export const Members = () => {
     const [members, setMembers] = useState('');
@@ -58,6 +61,9 @@ export const Members = () => {
 
     return (
         <MembersWrapper>
+            <HeaderWrapper>
+                <Heading type={5} text="Members" />
+            </HeaderWrapper>
             <InviteMembers />
             <MembersSection 
             members={members} 
