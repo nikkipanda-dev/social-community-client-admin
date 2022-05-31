@@ -42,7 +42,7 @@ function App() {
     useEffect(() => {
       let loading = true;
         if (loading) {
-            if (Cookies.get('auth_user')) {
+            if (Cookies.get('admin_auth_user')) {
                 handleLogIn();
             } else {
                 handleLogOut();

@@ -99,7 +99,7 @@ export const InviteMembers = () => {
                 }
             });
 
-            const authToken = JSON.parse(Cookies.get('auth_user_token'));
+            const authToken = JSON.parse(Cookies.get('admin_user_token'));
 
             axiosInstance.post(process.env.REACT_APP_BASE_URL + "invite", inviteForm, {
                 headers: {

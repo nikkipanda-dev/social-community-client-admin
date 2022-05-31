@@ -55,10 +55,10 @@ export const Navbar = ({
 
     const logout = () => {
         if (isAuth()) {
-            const authToken = JSON.parse(Cookies.get('auth_user_token'));
+            const authToken = JSON.parse(Cookies.get('admin_user_token'));
 
             const logoutForm = new FormData();
-            logoutForm.append('email', JSON.parse(Cookies.get('auth_user')).email);
+            logoutForm.append('email', JSON.parse(Cookies.get('admin_auth_user')).email);
 
             axiosInstance.post(process.env.REACT_APP_BASE_URL + 'logout', logoutForm, {
                 headers: {
@@ -69,8 +69,8 @@ export const Navbar = ({
             .then(response => {
                 if (response.data.isSuccess) {
                     setTimeout(() => {
-                        Cookies.remove('auth_user');
-                        Cookies.remove('auth_user_token');
+                        Cookies.remove('admin_auth_user');
+                        Cookies.remove('admin_user_token');
                         handleLogOut();
                         navigate('/');
                     }, 1000);

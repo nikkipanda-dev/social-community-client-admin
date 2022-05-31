@@ -26,7 +26,7 @@ export const Members = () => {
 
     const getUsers = () => {
         if (isAuth()) {
-            const authToken = JSON.parse(Cookies.get('auth_user_token'));
+            const authToken = JSON.parse(Cookies.get('admin_user_token'));
 
             axiosInstance.get(process.env.REACT_APP_BASE_URL + "users", {
                 headers: {

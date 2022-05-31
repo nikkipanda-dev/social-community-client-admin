@@ -4,7 +4,7 @@ import Cookies from 'js-cookie';
 export const isAuth = () => {
     let isAuth = false;
     
-    if ((Cookies.get('auth_user') && JSON.parse(Cookies.get('auth_user'))) && (Cookies.get('auth_user_token') && JSON.parse(Cookies.get('auth_user_token')))) {
+    if ((Cookies.get('admin_auth_user') && JSON.parse(Cookies.get('admin_auth_user'))) && (Cookies.get('admin_user_token') && JSON.parse(Cookies.get('admin_user_token')))) {
         isAuth = true;
     }
 

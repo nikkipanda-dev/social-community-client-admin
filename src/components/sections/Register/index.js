@@ -45,8 +45,23 @@ export const Register = ({
     handleLogIn,
     handleLogOut,
 }) => {
-    console.log('param ', window.location.pathname);
     const navigate = useNavigate();
+
+    const handleCreateChatEngineUser = (credentials) => {
+        const createUserForm = new FormData();
+        createUserForm.append('username', credentials.user.username);
+        createUserForm.append('first_name', credentials.user.first_name);
+        createUserForm.append('username', credentials.user.last_name);
+        createUserForm.append('secret', credentials.chatengine.secret);
+
+        createChatEngineUser(createUserForm, credentials.chatengine.key_id).then(response => {
+            console.info('chatengine res ', response.data);
+        })
+
+        .catch(err => {
+            console.error('chat engine err ', err);
+        });
+    }
 
     const onFinish = values => {
         const registerForm = new FormData();
@@ -65,20 +80,24 @@ export const Register = ({
         .then (response => {
             console.log('res ', response.data);
             if (response.data.isSuccess) {
-                Cookies.set('auth_user', JSON.stringify(response.data.data.details.user), {
+                Cookies.set('admin_auth_user', JSON.stringify(response.data.data.details.user), {
                     expires: .5,
                     secure: true,
                     sameSite: 'strict',
                 });
 
-                Cookies.set('auth_user_token', JSON.stringify(response.data.data.details.token), {
+                Cookies.set('admin_user_token', JSON.stringify(response.data.data.details.token), {
                     expires: .5,
                     secure: true,
                     sameSite: 'strict',
                 });
 
-                if (Cookies.get('auth_user') && Cookies.get('auth_user_token')) {
+                if (Cookies.get('admin_auth_user') && Cookies.get('admin_user_token')) {
                     console.log('valid')
+                    handleCreateChatEngineUser({
+                        user: response.data.data.details.user,
+                        chatengine: response.data.data.details.chatengine,
+                    });
 
                     setTimeout(() => {
                         handleLogIn(true);
@@ -168,4 +187,12 @@ export const Register = ({
             </Form>
         </RegisterWrapper>
     )
+}
+
+function createChatEngineUser(form, key) {
+    return axiosInstance.post(process.env.REACT_API_CHATENGINE_BASE_URL + "users/", form, {
+        headers: {
+            'PRIVATE-KEY': key, 
+        }
+    })
 }

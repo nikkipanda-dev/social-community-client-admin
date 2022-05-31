@@ -70,19 +70,19 @@ export const Form = ({
 
         .then (response => {
             if (response.data.isSuccess) {
-                Cookies.set('auth_user', JSON.stringify(response.data.data.details.user), { 
+                Cookies.set('admin_auth_user', JSON.stringify(response.data.data.details.user), { 
                     expires: .5,
                     secure: true,
                     sameSite: 'strict',
                 });
 
-                Cookies.set('auth_user_token', JSON.stringify(response.data.data.details.token), {
+                Cookies.set('admin_user_token', JSON.stringify(response.data.data.details.token), {
                     expires: .5,
                     secure: true,
                     sameSite: 'strict',
                 });
 
-                if (Cookies.get('auth_user') && Cookies.get('auth_user_token')) {
+                if (Cookies.get('admin_auth_user') && Cookies.get('admin_user_token')) {
                     console.log('valid')
 
                     setTimeout(() => {
